@@ -52,15 +52,28 @@ namespace :divisions do
 
   task :counties do
     response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/44/4451.html")
+    dataset = {}
 
     if response.success?
       doc = Nokogiri::HTML(response.body)
-      doc.css('tr.countytr td a').each do |link|
-        puts link.attr(:href)
-        puts link.text
-      end
-    end
+      doc.css('tr.countytr').each do |row|
+        code, name = row.css('td a').map(&:text)
 
+        if code and name
+          dataset[code[0, 6]] = name.strip
+        end
+      end
+
+      output = CSV.generate do |csv|
+        dataset.each do |code, name|
+          csv << [code, name]
+        end
+      end
+
+      puts output
+    else
+      puts response.body
+    end
   end
 end
 
