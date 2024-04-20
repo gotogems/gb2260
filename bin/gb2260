@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'cn/gb2260'
+require 'irb'
+
+IRB.start(__FILE__)
