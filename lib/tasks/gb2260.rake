@@ -74,7 +74,7 @@ namespace :gb2260 do
     prefecture_n = args[:code][2, 2]
     response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}/#{prefecture_n}/#{args[:code]}.html")
     csv_file = 'db/townships.csv'
-    dataset = {}
+    dataset = csv_data(csv_file)
 
     if response.success?
       doc = Nokogiri::HTML(response.body)
@@ -82,7 +82,7 @@ namespace :gb2260 do
         code, name = row.css('td a').map(&:text)
 
         if code and name
-          dataset[code] = name.strip
+          dataset[code[0, 9]] = name.strip
         end
       end
 
