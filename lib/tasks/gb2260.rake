@@ -27,11 +27,7 @@ namespace :gb2260 do
     province_n = args[:code][0, 2]
     response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}.html")
     csv_file = 'db/prefectures.csv'
-    dataset = {}
-
-    if File.exist?(csv_file)
-      dataset = CSV.parse(File.read(csv_file)).to_h
-    end
+    dataset = csv_data(csv_file)
 
     if response.success?
       doc = Nokogiri::HTML(response.body)
@@ -47,13 +43,13 @@ namespace :gb2260 do
     end
   end
 
-  task :counties do |t, args|
+  task :counties, [:code] do |t, args|
     args.with_defaults(code: '445100')
     province_n = args[:code][0, 2]
     prefecture_n = args[:code][0, 4]
     response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}/#{prefecture_n}.html")
     csv_file = 'db/counties.csv'
-    dataset = {}
+    dataset = csv_data(csv_file)
 
     if response.success?
       doc = Nokogiri::HTML(response.body)
@@ -73,6 +69,14 @@ namespace :gb2260 do
   end
 
   task :divisions do
+  end
+
+  def csv_data(csv_file)
+    if File.exist?(csv_file)
+      CSV.parse(File.read(csv_file)).to_h
+    else
+      {}
+    end
   end
 
   def generate_csv(hash)
