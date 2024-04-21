@@ -12,24 +12,19 @@ module GB2260
     end
 
     def parent
-      # if (this.isPrefecture) {
-      #   return new Division(~~(this.code / 10_000) * 10_000)
-      # }
-      # if (this.isCounty) {
-      #   return new Division(~~(this.code / 100) * 100)
-      # }
-      # return null
+      if prefecture?
+        Division.new("#{code[0, 2]}0000")
+      elsif county?
+        Division.new("#{code[0, 4]}00")
+      else
+        nil
+      end
     end
 
     def children
-
-      # GB2260.divisions.select do |division|
-      #   division.parent&.code.eql?(@code)
-      # end
-
-      # return Object.keys(gb2260)
-      #   .map((code) => new Division(code))
-      #   .filter((division) => division.getParent()?.code === this.code)
+      Dataset.divisions.select do |division|
+        division.parent&.code.eql?(code)
+      end
     end
 
     def province?
@@ -47,23 +42,25 @@ module GB2260
     def code
       @code.to_s
     end
+
+    def to_tree
+      # toTree(...args: number[]) {
+      #   return {
+      #     ...this.toJS(),
+      #     contents:
+      #       this.code === args.shift()
+      #         ? this.getChildren().map((division) => division.toTree(...args))
+      #         : []
+      #   }
+      # }
+    end
+
+    def to_h
+      {
+        code: code,
+        name: name,
+        type: type
+      }
+    end
   end
 end
-
-#   toTree(...args: number[]) {
-#     return {
-#       ...this.toJS(),
-#       contents:
-#         this.code === args.shift()
-#           ? this.getChildren().map((division) => division.toTree(...args))
-#           : []
-#     }
-#   }
-
-#   toJS() {
-#     return {
-#       code: this.code,
-#       name: this.name,
-#       type: this.type
-#     }
-#   }
