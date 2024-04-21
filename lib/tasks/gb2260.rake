@@ -68,6 +68,31 @@ namespace :gb2260 do
     end
   end
 
+  task :townships, [:code] do |t, args|
+    args.with_defaults(code: '445103')
+    province_n = args[:code][0, 2]
+    prefecture_n = args[:code][2, 2]
+    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}/#{prefecture_n}/#{args[:code]}.html")
+    csv_file = 'db/townships.csv'
+    dataset = {}
+
+    if response.success?
+      doc = Nokogiri::HTML(response.body)
+      doc.css('tr.towntr').each do |row|
+        code, name = row.css('td a').map(&:text)
+
+        if code and name
+          dataset[code] = name.strip
+        end
+      end
+
+      output_string = generate_csv(dataset)
+      output_file(csv_file, output_string)
+    else
+      puts response.body
+    end
+  end
+
   task :divisions do
     Rake::Task['gb2260:provinces'].invoke
 
@@ -118,13 +143,3 @@ namespace :gb2260 do
     end
   end
 end
-
-# response = Faraday.get('https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/44/51/445103.html')
-
-# if response.success?
-#   doc = Nokogiri::HTML(response.body)
-#   doc.css('tr.towntr td a').each do |link|\
-#     puts link.attr(:href)
-#     puts link.text
-#   end
-# end
