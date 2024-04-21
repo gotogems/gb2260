@@ -22,8 +22,9 @@ namespace :gb2260 do
     end
   end
 
-  task :prefectures do
-    response = conn.get('/sj/tjbz/tjyqhdmhcxhfdm/2023/44.html')
+  task :prefectures, [:code] do |t, args|
+    args.with_defaults(code: '440000')
+    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{args[:code][0, 2]}.html")
     dataset = {}
 
     if response.success?
@@ -33,20 +34,16 @@ namespace :gb2260 do
         dataset[code[0, 6]] = name.strip
       end
 
-      output = CSV.generate do |csv|
-        dataset.each do |code, name|
-          csv << [code, name]
-        end
-      end
-
-      puts output
+      output_string = generate_csv(dataset)
+      output_file('db/prefectures.csv', output_string)
     else
       puts response.body
     end
   end
 
-  task :counties do
-    response = conn.get('/sj/tjbz/tjyqhdmhcxhfdm/2023/44/4451.html')
+  task :counties do |t, args|
+    args.with_defaults(code: '')
+    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/44/4451.html")
     dataset = {}
 
     if response.success?
@@ -59,13 +56,8 @@ namespace :gb2260 do
         end
       end
 
-      output = CSV.generate do |csv|
-        dataset.each do |code, name|
-          csv << [code, name]
-        end
-      end
-
-      puts output
+      output_string = generate_csv(dataset)
+      output_file('db/counties.csv', output_string)
     else
       puts response.body
     end
