@@ -69,6 +69,19 @@ namespace :gb2260 do
   end
 
   task :divisions do
+    Rake::Task['gb2260:provinces'].invoke
+
+    csv_data('db/provinces.csv').keys.each do |code|
+      Rake::Task['gb2260:prefectures'].execute(
+        Rake::TaskArguments.new([:code], [code])
+      )
+    end
+
+    csv_data('db/prefectures.csv').keys.each do |code|
+      Rake::Task['gb2260:counties'].execute(
+        Rake::TaskArguments.new([:code], [code])
+      )
+    end
   end
 
   def csv_data(csv_file)
