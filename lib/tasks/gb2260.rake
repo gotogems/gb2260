@@ -1,4 +1,4 @@
-namespace :divisions do
+namespace :gb2260 do
   conn = Faraday.new(url: 'https://www.stats.gov.cn')
 
   task :provinces do
@@ -15,20 +15,15 @@ namespace :divisions do
         dataset[code] = name
       end
 
-      output = CSV.generate do |csv|
-        dataset.each do |code, name|
-          csv << [code, name]
-        end
-      end
-
-      puts output
+      output_string = generate_csv(dataset)
+      output_file('db/provinces.csv', output_string)
     else
       puts response.body
     end
   end
 
   task :prefectures do
-    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/44.html")
+    response = conn.get('/sj/tjbz/tjyqhdmhcxhfdm/2023/44.html')
     dataset = {}
 
     if response.success?
@@ -51,7 +46,7 @@ namespace :divisions do
   end
 
   task :counties do
-    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/44/4451.html")
+    response = conn.get('/sj/tjbz/tjyqhdmhcxhfdm/2023/44/4451.html')
     dataset = {}
 
     if response.success?
@@ -73,6 +68,23 @@ namespace :divisions do
       puts output
     else
       puts response.body
+    end
+  end
+
+  task :divisions do
+  end
+
+  def generate_csv(hash)
+    CSV.generate do |csv|
+      hash.each do |code, name|
+        csv << [code, name]
+      end
+    end
+  end
+
+  def output_file(filename, string)
+    File.open(filename, 'w') do |f|
+      f.write(string)
     end
   end
 end
