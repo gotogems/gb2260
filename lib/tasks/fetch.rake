@@ -55,10 +55,7 @@ namespace :fetch do
       doc = Nokogiri::HTML(response.body)
       doc.css('tr.countytr').each do |row|
         code, name = row.css('td a').map(&:text)
-
-        if code and name
-          dataset[code[0, 6]] = name.strip
-        end
+        code and (dataset[code[0, 6]] = name.strip)
       end
 
       output_string = generate_csv(dataset)
@@ -72,7 +69,7 @@ namespace :fetch do
     args.with_defaults(code: '445103')
     province_n = args[:code][0, 2]
     prefecture_n = args[:code][2, 2]
-    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}/#{prefecture_n}/#{args[:code]}.html")
+    response = conn.get("/sj/tjbz/tjyqhdmhcxhfdm/2023/#{province_n}/#{prefecture_n}/#{args.code}.html")
     csv_file = 'db/townships.csv'
     dataset = csv_data(csv_file)
 
@@ -80,10 +77,7 @@ namespace :fetch do
       doc = Nokogiri::HTML(response.body)
       doc.css('tr.towntr').each do |row|
         code, name = row.css('td a').map(&:text)
-
-        if code and name
-          dataset[code[0, 9]] = name.strip
-        end
+        code and (dataset[code[0, 9]] = name.strip)
       end
 
       output_string = generate_csv(dataset)
