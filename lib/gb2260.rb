@@ -1,4 +1,13 @@
 module GB2260
-end
+  module Utils
+    def load_file(path)
+      CSV.parse(File.read(path))
+    end
 
-# load_file
+    def output_file(filename, string)
+      File.open(filename, 'w') do |f|
+        f.write(string)
+      end
+    end
+  end
+end

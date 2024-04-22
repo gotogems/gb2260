@@ -1,4 +1,5 @@
 namespace :fetch do
+  include GB2260::Utils
   conn = Faraday.new(url: 'https://www.stats.gov.cn')
 
   task :provinces do
@@ -89,7 +90,7 @@ namespace :fetch do
 
   def csv_data(csv_file)
     if File.exist?(csv_file)
-      CSV.parse(File.read(csv_file)).to_h
+      load_file(csv_file).to_h
     else
       {}
     end
@@ -100,12 +101,6 @@ namespace :fetch do
       hash.each do |code, name|
         csv << [code, name]
       end
-    end
-  end
-
-  def output_file(filename, string)
-    File.open(filename, 'w') do |f|
-      f.write(string)
     end
   end
 end
