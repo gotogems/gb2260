@@ -5,5 +5,8 @@ module GB2260
 
     def self.keys
     end
+
+    def self.[]()
+    end
   end
 end
