@@ -4,7 +4,7 @@ List administrative divisions
 
 ## Installation
 
-```zsh
+```
 gem install cn-gb2260
 ```
 
