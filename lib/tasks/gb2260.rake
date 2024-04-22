@@ -38,6 +38,9 @@ namespace :gb2260 do
       rescue Faraday::TimeoutError
         sleep 5
         retry
+      rescue Faraday::Error
+        sleep 15
+        retry
       end
     end
   end
