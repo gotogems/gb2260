@@ -1,5 +1,5 @@
 namespace :gb2260 do
-  include GB2260::Utils
+  include GB2260::Dataset::Utils
 
   task :provinces => 'fetch:provinces'
   task :prefectures do

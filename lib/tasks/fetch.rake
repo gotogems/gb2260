@@ -1,5 +1,5 @@
 namespace :fetch do
-  include GB2260::Utils
+  include GB2260::Dataset::Utils
   conn = Faraday.new(url: 'https://www.stats.gov.cn')
 
   task :provinces do
