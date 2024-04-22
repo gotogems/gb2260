@@ -43,16 +43,14 @@ module GB2260
       @code.to_s
     end
 
-    def to_tree
-      # toTree(...args: number[]) {
-      #   return {
-      #     ...this.toJS(),
-      #     contents:
-      #       this.code === args.shift()
-      #         ? this.getChildren().map((division) => division.toTree(...args))
-      #         : []
-      #   }
-      # }
+    def to_tree(*args)
+      contents = if code.eql?(args.shift.to_s)
+        children.map { |division| division.to_tree(*args) }
+      else
+        []
+      end
+
+      to_h.merge({ contents: contents })
     end
 
     def to_h
