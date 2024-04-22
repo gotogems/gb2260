@@ -4,7 +4,7 @@ namespace :gb2260 do
     provinces_hash.each do |code, name|
       begin
         puts "#{code}: #{name}"
-        Rake::Task['gb2260:prefectures'].execute(
+        Rake::Task['fetch:prefectures'].execute(
           Rake::TaskArguments.new([:code], [code])
         )
       rescue Faraday::TimeoutError
@@ -18,7 +18,7 @@ namespace :gb2260 do
     prefectures_hash.each do |code, name|
       begin
         puts "#{code}: #{name}"
-        Rake::Task['gb2260:counties'].execute(
+        Rake::Task['fetch:counties'].execute(
           Rake::TaskArguments.new([:code], [code])
         )
       rescue Faraday::TimeoutError
@@ -35,14 +35,18 @@ namespace :gb2260 do
   end
 
   def provinces_hash
-    GB2260::Dataset.load_file('db/provinces.csv').to_h
+    load_file('db/provinces.csv').to_h
   end
 
   def prefectures_hash
-    GB2260::Dataset.load_file('db/prefectures.csv').to_h
+    load_file('db/prefectures.csv').to_h
   end
 
   def counties_hash
-    GB2260::Dataset.load_file().to_h
+    load_file('db/counties.csv').to_h
+  end
+
+  def load_file(path)
+    CSV.parse(File.read(path))
   end
 end
