@@ -29,6 +29,17 @@ namespace :gb2260 do
   end
 
   task :townships do
+    counties_hash.each do |code, name|
+      begin
+        puts "#{code}: #{name}"
+        Rake::Task['fetch:townships'].execute(
+          Rake::TaskArguments.new([:code], [code])
+        )
+      rescue Faraday::TimeoutError
+        sleep 5
+        retry
+      end
+    end
   end
 
   task :divisions do
