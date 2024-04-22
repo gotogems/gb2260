@@ -17,7 +17,7 @@ namespace :gb2260 do
   task :counties do
     prefectures_hash.each do |code, name|
       begin
-        puts "#{code}: #{name}"
+        info code, name
         Rake::Task['fetch:counties'].execute(
           Rake::TaskArguments.new([:code], [code])
         )
@@ -31,7 +31,7 @@ namespace :gb2260 do
   task :townships do
     counties_hash.each do |code, name|
       begin
-        puts "#{code}: #{name}"
+        info code, name
         Rake::Task['fetch:townships'].execute(
           Rake::TaskArguments.new([:code], [code])
         )
@@ -62,5 +62,9 @@ namespace :gb2260 do
 
   def load_file(path)
     CSV.parse(File.read(path))
+  end
+
+  def info(*args)
+    puts '[%s] %s' % args
   end
 end
