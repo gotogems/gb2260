@@ -1,5 +1,8 @@
 module GB2260
-  module Dataset
+  class Dataset
+    def initialize
+    end
+
     def self.keys
     end
   end
