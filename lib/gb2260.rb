@@ -1,3 +1,6 @@
+require 'gb2260/division'
+require 'gb2260/version'
+
 module GB2260
   module Utils
     def load_file(path)
