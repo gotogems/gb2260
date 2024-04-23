@@ -27,11 +27,16 @@ type: 'prefecture'
 }
 ```
 
+| 省级 | [provinces](./db/provinces.csv) | 4.0K |
+| 地级 | [prefectures](./db/prefectures.csv) | 8.0K |
+| 县级 | [counties](./db/counties.csv) | 56K |
+| 乡级 | [townships](./db/townships.csv) | 908K |
+
 ## References
 
-- [关于更新全国统计用区划代码和城乡划分代码的公告](https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/index.html)
+- [全国统计用区划代码和城乡划分代码](https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/index.html)
 - [统计用区划代码和城乡划分代码编制规则](https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/t20230213_1902741.html)
 
 ## License
 
-**gb2260** is released under the [1-clause BSD License](https://opensource.org/license/bsd-1-clause)
+This gem is released under the [1-clause BSD License](https://opensource.org/license/bsd-1-clause)
