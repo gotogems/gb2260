@@ -5,10 +5,10 @@ module GB2260
 
     def initialize(code)
       @code = code.to_i
-      @name = Dataset[code].fetch(:name)
-      @type = province? && 'province' or
-              prefecture? && 'prefecture' or
-              county? && 'county' or 'unknown'
+      @name = Dataset[code][:name]
+      @type = province? && 'province' ||
+              prefecture? && 'prefecture' ||
+              county? && 'county' || 'unknown'
     end
 
     def parent
