@@ -27,20 +27,17 @@ bundle install
 ```ruby
 require 'gb2260'
 
+GB2260::Dataset[445100]
+GB2260::Dataset.divisions
+```
+
+```ruby
 division = GB2260::Division.new(445100)
 division.province?
 division.prefecture?
 division.county?
-```
-
-```ruby
 division.parent
 division.children
-```
-
-```ruby
-GB2260::Dataset[445100]
-GB2260::Dataset.divisions
 ```
 
 ## Datasets
