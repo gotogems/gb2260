@@ -44,7 +44,7 @@ module GB2260
     end
 
     def to_tree(*args)
-      contents = if code.eql?(args.shift)
+      contents = if code.eql?(args.shift.to_s)
         children.map { |division| division.to_tree(*args) }
       else
         []

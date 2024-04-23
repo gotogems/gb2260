@@ -4,7 +4,7 @@ A simple gem for looking-up administrative divisions
 
 ## Installation
 
-Install globally
+Install globally:
 
 ```zsh
 gem install cn-gb2260
@@ -15,6 +15,8 @@ Or, add this line to your `Gemfile`:
 ```ruby
 gem 'gb2260', github: 'gotogems/gb2260'
 ```
+
+Run the following command:
 
 ```zsh
 bundle install
@@ -53,7 +55,7 @@ type: 'prefecture'
 
 ## Datasets
 
-Download datasets from the `db` directory
+Download datasets from the [db](./db) directory
 
 |  📁  | File List                               |                              Download |
 | :--: | :-------------------------------------- | ------------------------------------: |
