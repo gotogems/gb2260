@@ -16,7 +16,7 @@ Or, add this line to your `Gemfile` ⤵️
 gem 'gb2260', github: 'gotogems/gb2260'
 ```
 
-Run the following command ⤵️
+Then, run following command ⤵️
 
 ```zsh
 bundle install
@@ -31,7 +31,9 @@ division = GB2260::Division.new(445100)
 division.province?
 division.prefecture?
 division.county?
-division.township?
+```
+
+```ruby
 division.parent
 division.children
 ```
@@ -39,18 +41,6 @@ division.children
 ```ruby
 GB2260::Dataset[445100]
 GB2260::Dataset.divisions
-```
-
-```
-> division
-Division {
-code: 445100,
-name: '潮州市',
-isProvince: false,
-isPrefecture: true,
-isCounty: false,
-type: 'prefecture'
-}
 ```
 
 ## Datasets
