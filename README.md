@@ -4,12 +4,10 @@ A simple gem for looking-up administrative divisions
 
 ## Installation
 
-```shell
-gem install cn-gb2260
-```
+Install globally
 
 ```shell
-gb2260
+gem install cn-gb2260
 ```
 
 Or, add this line to your `Gemfile`:
@@ -41,6 +39,8 @@ isCounty: false,
 type: 'prefecture'
 }
 ```
+
+Download datasets from the db directory
 
 |  📁  | File List                               |                              Download |
 | :--: | :-------------------------------------- | ------------------------------------: |
