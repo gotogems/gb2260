@@ -6,7 +6,7 @@ A simple gem for looking-up administrative divisions
 
 Install globally
 
-```shell
+```zsh
 gem install cn-gb2260
 ```
 
@@ -16,7 +16,7 @@ Or, add this line to your `Gemfile`:
 gem 'gb2260', github: 'gotogems/gb2260'
 ```
 
-```shell
+```zsh
 bundle install
 ```
 
@@ -26,6 +26,17 @@ bundle install
 require 'gb2260'
 
 division = GB2260::Division.new(445100)
+division.province?
+division.prefecture?
+division.county?
+division.township?
+division.parent
+division.children
+```
+
+```ruby
+GB2260::Dataset[445100]
+GB2260::Dataset.divisions
 ```
 
 ```
@@ -40,7 +51,9 @@ type: 'prefecture'
 }
 ```
 
-Download datasets from the db directory
+## Datasets
+
+Download datasets from the `db` directory
 
 |  📁  | File List                               |                              Download |
 | :--: | :-------------------------------------- | ------------------------------------: |
