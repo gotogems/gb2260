@@ -27,12 +27,12 @@ type: 'prefecture'
 }
 ```
 
-|      |                               File List |                              Download |
-| ---- | --------------------------------------: | ------------------------------------: |
-| 省级 |     [provinces.csv](./db/provinces.csv) |   [4.0K](https://dub.sh/cn-provinces) |
+| 🇨🇳   | File List                               |                              Download |
+| ---- | :-------------------------------------- | ------------------------------------: |
+| 省级 | [provinces.csv](./db/provinces.csv)     |   [4.0K](https://dub.sh/cn-provinces) |
 | 地级 | [prefectures.csv](./db/prefectures.csv) | [8.0K](https://dub.sh/cn-prefectures) |
-| 县级 |       [counties.csv](./db/counties.csv) |     [56K](https://dub.sh/cn-counties) |
-| 乡级 |     [townships.csv](./db/townships.csv) |   [908K](https://dub.sh/cn-townships) |
+| 县级 | [counties.csv](./db/counties.csv)       |     [56K](https://dub.sh/cn-counties) |
+| 乡级 | [townships.csv](./db/townships.csv)     |   [908K](https://dub.sh/cn-townships) |
 
 ## References
 
