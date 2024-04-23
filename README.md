@@ -27,10 +27,12 @@ type: 'prefecture'
 }
 ```
 
-| 省级 | [provinces](./db/provinces.csv) | 4.0K |
-| 地级 | [prefectures](./db/prefectures.csv) | 8.0K |
-| 县级 | [counties](./db/counties.csv) | 56K |
-| 乡级 | [townships](./db/townships.csv) | 908K |
+| Levels | File List                               | File Sizes |
+| ------ | --------------------------------------- | ---------- |
+| 省级   | [provinces.csv](./db/provinces.csv)     | 4.0K       |
+| 地级   | [prefectures.csv](./db/prefectures.csv) | 8.0K       |
+| 县级   | [counties.csv](./db/counties.csv)       | 56K        |
+| 乡级   | [townships.csv](./db/townships.csv)     | 908K       |
 
 ## References
 
