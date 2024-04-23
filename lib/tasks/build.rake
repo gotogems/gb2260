@@ -1,9 +1,10 @@
-namespace :gb2260 do
+namespace :build do
   include GB2260::Dataset::Utils
 
   task :provinces => 'fetch:provinces'
   task :prefectures do
-    provinces_hash.each do |code, name|
+    dataset('db/provinces.csv')
+      .each do |code, name|
       begin
         Rake::Task['fetch:prefectures'].execute(
           Rake::TaskArguments.new([:code], [code])
@@ -18,7 +19,8 @@ namespace :gb2260 do
   end
 
   task :counties do
-    prefectures_hash.each do |code, name|
+    dataset('db/prefectures.csv')
+      .each do |code, name|
       begin
         Rake::Task['fetch:counties'].execute(
           Rake::TaskArguments.new([:code], [code])
@@ -33,7 +35,8 @@ namespace :gb2260 do
   end
 
   task :townships do
-    counties_hash.each do |code, name|
+    dataset('db/counties.csv')
+      .each do |code, name|
       begin
         Rake::Task['fetch:townships'].execute(
           Rake::TaskArguments.new([:code], [code])
@@ -51,18 +54,17 @@ namespace :gb2260 do
   end
 
   task :divisions do
+    puts JSON.pretty_generate(
+      dataset('db/provinces.csv').merge(
+        dataset('db/prefectures.csv').merge(
+          dataset('db/counties.csv')
+        )
+      )
+    )
   end
 
-  def provinces_hash
-    load_file('db/provinces.csv').to_h
-  end
-
-  def prefectures_hash
-    load_file('db/prefectures.csv').to_h
-  end
-
-  def counties_hash
-    load_file('db/counties.csv').to_h
+  def dataset(csv_file)
+    load_file(csv_file).to_h
   end
 
   def info(*args)

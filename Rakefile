@@ -3,6 +3,6 @@ require 'nokogiri'
 require 'faraday'
 require 'json'
 require 'csv'
-require 'gb2260/dataset/utils'
 
+require 'gb2260/dataset/utils'
 Rake.add_rakelib('lib/tasks')
