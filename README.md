@@ -8,11 +8,26 @@ A simple gem for looking-up administrative divisions
 gem install cn-gb2260
 ```
 
+```shell
+gb2260
+```
+
+Or, add this line to your `Gemfile`:
+
+```ruby
+gem 'gb2260', github: 'gotogems/gb2260'
+```
+
+```shell
+bundle install
+```
+
 ## Usage
 
 ```ruby
 require 'gb2260'
-division = Division.new(445100)
+
+division = GB2260::Division.new(445100)
 ```
 
 ```
@@ -27,7 +42,7 @@ type: 'prefecture'
 }
 ```
 
-|  🏷️  | File List                               |                              Download |
+|  📁  | File List                               |                              Download |
 | :--: | :-------------------------------------- | ------------------------------------: |
 | 省级 | [provinces.csv](./db/provinces.csv)     |   [4.0K](https://dub.sh/cn-provinces) |
 | 地级 | [prefectures.csv](./db/prefectures.csv) | [8.0K](https://dub.sh/cn-prefectures) |
