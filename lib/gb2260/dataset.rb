@@ -16,8 +16,8 @@ module GB2260
     end
 
     def self.divisions
-      keys.map do |division|
-        Division.new(division)
+      keys.map do |code|
+        Division.new(code)
       end
     end
 
